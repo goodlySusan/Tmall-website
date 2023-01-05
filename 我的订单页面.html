@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title></title>
+		<script src="https://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
+		<link href="https://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+		<script src="https://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+		<style>
+		/*置顶导航*/
+		    html body{
+		        font-size: 12px;
+		        font-family: Arial;
+		    }
+		    .redColor{
+		        color: #C40000 !important;
+		    }
+		    nav.top{
+		        background-color: #f2f2f2;
+		        padding-top: 5px;
+		        padding-bottom: 5px;
+		        border-bottom:1px solid  #e7e7e7;
+		    }
+		    nav.top span, nav.top a{
+		        color: #999;
+		        margin: 0px 10px 0px 10px;
+		    }
+		    nav.top a:hover{
+		        color: #C40000;
+		        text-decoration: none;
+		    }
+			/*简单搜索栏*/
+			div.searchBelow a{
+			    color: #999;
+			}
+			div.searchBelow a:hover{
+				color: #c40000;
+				text-decoration: none;
+			}
+			div.simpleSearchDiv{
+				width: 300px;
+				height: 40px;
+				background-color: #c40000;
+				margin: 10px 20px 40px;
+				padding: 1px;
+				display: block;
+			}
+			div.simpleSearchDiv input{
+				width: 225px;
+				height: 34px;
+				border: 1px solid transparent;
+				margin: 2px;
+				outline: none;
+			}
+			div.simpleSearchDiv button{
+				width: 60px;
+				background-color: #C40000;
+				border: 1px solid transparent;
+				color: white;
+				font-size: 14px;
+			}
+			div.searchBelow{
+				margin-left: -20px;
+				margin-top: 3px;
+			}
+			div.searchBelow span{
+				color: #999;
+			}
+			div.searchBelow a{
+				margin: 0px 20px 0px 20px;
+				font-size: 14px;
+			}
+			#simpleLogo{
+				position: absolute;
+				width: 140px;
+				top: 50px;
+				left: 10px;
+			}
+			/*标题部分*/	
+			div.boughtDiv{
+				max-width: 1013px;
+				margin: 10px auto;
+			}
+			div.orderType div{
+				border-bottom: 2px solid #e8e8e8;
+				float: left;
+			}
+			div.orderType a{
+				color: black;
+				font-size: 16px;
+				font-weight: bold;
+				text-decoration: none;
+				border-right: 1px solid #e8e8e8;
+				display: inline-block; /*使下外边距生效*/
+				margin-bottom: 10px;
+				padding: 0px 20px;
+			}
+			div.orderType a:hover{
+				color: #c40000;
+				text-decoration: none;
+			}
+			div.orderType div.selectedOrderType{
+				border-bottom: 2px solid #C40000;
+			}
+			div.selectedOrderType a{
+				color: #C40000;
+			}
+			a.noRightborder{
+				border-right-width: 0px !important;
+			}
+			div.orderTypeLastOne{
+				overflow: hidden;
+				float: none !important;
+				height: 34px;
+				border-bottom: 2px solid #e8e8e8;
+			}
+			table.orderListTitleTable{
+				border: 1px solid #E8E8E8;
+				background-color: #f5f5f5;
+				margin: 20px 0px;
+				width: 100%;
+				text-align: center;
+				font-size: 12px;
+			}
+			table.orderListTitleTable td{
+				padding: 12px 0px;
+			}
+			/*产品列表部分*/
+			table.orderListItemTable{
+				border: 2px solid #ececec;
+				width: 100%;
+				margin: 20px 0px;
+				font-size: 12px;
+			}
+			table.orderListItemTable:hover{
+				border: 2px solid #aaa !important;
+			}
+			table.orderListItemTable td{
+				padding: 8px 10px;
+			}
+			tr.orderListItemFirstTR{
+				background-color: #f1f1f1;
+			}
+			div.orderItemWangWangGif{
+			    display: inline-block;
+			    width: 67px;
+			    height: 22px;
+			    background-image:url(https://how2j.cn/tmall/img/site/wangwang.gif);
+			    background-repeat: no-repeat;
+			    background-color: transparent;
+			    background-attachment: scroll;
+			    background-position: -0px -0px;
+			    position: relative;
+			    top: 0px;
+			    left: 2px;
+			}
+			td.orderItemDeleteTD{
+				text-align: right;
+			}
+			span.orderListItemDelete{
+				display: inline-block;
+				font-size: 16px;
+				color: #999999;
+				margin: 0px 10px;
+			}
+			div.orderListItemProductLinkOutDiv{
+				height: 80px;
+				position: relative;
+			}
+			div.orderListItemProductLinkInnerDiv{
+				position: absolute;
+				bottom: 0px;
+			}
+			div.orderListItemProductOriginalPrice{
+				color: #999999;
+				font-size: 14px;
+			}
+			div.orderListItemProductPrice{
+				color: #3c3c3c;
+				font-size: 14px;
+			}
+			td.orderItemOrderInfoPartTD{
+			    border: solid 1px #ECECEC;
+			}
+			td.orderListItemNumberTD{
+				text-align: center;
+			}
+			span.orderListItemNumber{
+				color: #3C3C3C;
+			}
+			td.orderListItemProductRealPriceTD{
+				text-align: center;
+			}
+			div.orderListItemProductRealPrice{
+				color: #3C3C3C;
+				font-size: 14px;
+				font-weight: bold;
+			}
+			div.orderListItemPriceWithTransport{
+				color: #6c6c6c;
+				font-size: 12px;
+			}
+			td.orderListItemButtonTD{
+				text-align: center;
+			}
+			button.orderListItemReview{
+				border: 1px solid #dcdcdc;
+				background-color: #ffffff;
+				border-radius: 2px;
+				color: #3C3C3C;
+				font-size: 12px;
+				font-weight: bold;
+				padding: 6px 12px;
+			}
+			button.orderListItemReview:hover{
+				border-color: #c40000;
+				color: #C40000;
+			}
+			button.orderListItemConfirm{
+				background-color: #66b6ff;
+				border-radius: 2px;
+				border-width: 0px;
+				padding: 6px 12px;
+				color: white;
+				font-size: 12px;
+				font-weight: bold;
+			}
+			button.orderListItemConfirm:hover{
+				background-color: #118adb;
+			}
+			table.orderListItemTable a{
+				color: #999999;
+			}
+			table.orderListItemTable a:hover{
+				color: #C40000;
+				text-decoration: none;
+			}
+			/*页脚一*/
+			div.descColumn a{
+				color: #999;
+			}
+			div.descColumn a:hover{
+				color: #c40000;
+				text-decoration: none;
+			}
+			div.footer{
+				margin: 0px 0px;
+				border-top-style: solid;
+				border-top-color: #e7e7e7;
+				border-top-width: 1px;
+			}
+			div.footer_ensure{
+				text-align: center;
+				margin-top: 24px;
+				margin-bottom: 24px;
+			}
+			div.footer_desc{
+				margin: 0px 20px;
+				padding-top: 30px;
+				border-top-style: solid;
+				border-top-color: #e7e7e7;
+				border-top-width: 1px;
+			}
+			div.footer_desc div.descColumn{
+				float: left;
+				width: 20%;
+				padding-left: 15px;
+			}
+			div.footer_desc div.descColumn span.descColumnTitle{
+				font-size: 16px;
+				font-weight: bold;
+				color: #646464;
+			}
+			div.footer_desc a{
+				display: block;
+				padding-top: 3px;
+			}
+			/*页脚二*/
+			div.footer{
+				margin: 0px 0px;
+				border-top-style: solid;
+				border-top-color: #e7e7e7;
+				border-top-width: 1px;			
+			}
+			div.copyright{
+				background-color: black;
+				border-top-style: solid;
+				border-top-color: #c40000;
+				border-top-width: 2px;
+			}
+			div.copyright div.white_link{
+				margin-left: 10px;
+				padding: 10px 0px;
+			}
+			div.copyright div.white_link a{
+				color: white;
+				padding: 0px 5px;
+			}
+			div.copyright span.slash{
+				color: white;
+			}
+			div.license{
+				margin-left: 10px;
+				padding-bottom: 30px;
+			}
+			div.license span{
+				color: #A4A4A4;
+			}
+			div.copyRightYear{
+				margin: 10px 0px;
+				color: #686868;
+			}
+			img.cateye{
+				margin-left: 20px;
+			}			
+		</style>
+	</head>
+	<body>
+		<!--置顶导航-->
+		<nav class="top ">
+		    <a href="#nowhere">
+		        <span class="glyphicon glyphicon-home redColor"></span>
+		        天猫首页
+		    </a>  
+		       
+		    <span>喵，欢迎来天猫</span>
+		        <a href="#nowhere">请登录</a>
+		        <a href="#nowhere">免费注册</a>  
+		    		     
+		    <span class="pull-right">
+		        <a href="#nowhere">我的订单</a>
+		        <a href="#nowhere">
+		        <span class=" glyphicon glyphicon-shopping-cart redColor" ></span>
+		        购物车<strong>0</strong>件</a>        
+		    </span>       
+		</nav>
+		<!--简单搜索栏-->
+		<div>
+			<a href=#nowhere><img src="https://how2j.cn/tmall/img/site/simpleLogo.png" class="simpleLogo" id="simpleLogo"></a>
+			<div class="simpleSearchDiv pull-right">  <!-- pull-right让元素浮动到右侧-->
+			    <input type="text" placeholder="平衡车  原汁机" name="keyword"/>
+			    <button class="searchButton" type="submit">搜天猫</button>
+			    <div class="searchBelow">
+				    <span><a href="#nowhere">冰箱</a><span>|</span></span>
+				    <span><a href="#nowhere">空调</a><span>|</span></span>
+				    <span><a href="#nowhere">男表</a><span>|</span></span>
+				    <span><a href="#nowhere">女表</a></span>
+			    </div>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+		<script>
+		var deleteOrder = false;
+		var deleteOrderid = 0;
+		 
+		$(function(){
+		    $("a[orderStatus]").click(function(){
+		        var orderStatus = $(this).attr("orderStatus");
+		        if('all'==orderStatus){
+		            $("table[orderStatus]").show();
+		        }
+		        else{
+		            $("table[orderStatus]").hide();
+		            $("table[orderStatus="+orderStatus+"]").show();        
+		        }
+		         
+		        $("div.orderType div").removeClass("selectedOrderType");
+		        $(this).parent("div").addClass("selectedOrderType");
+		    });
+		     
+		    $("a.deleteOrderLink").click(function(){
+		        deleteOrderid = $(this).attr("oid");
+		        deleteOrder = false;
+		        $("#deleteConfirmModal").modal("hide");
+		    });
+		     
+		    $("button.deleteConfirmButton").click(function(){
+		        deleteOrder = true;
+		        $("#deleteConfirmModal").modal('hide');
+		    });
+		     
+		    $('#deleteConfirmModal').on('hidden.bs.modal', function (e) {
+		        if(deleteOrder){
+		            var page="foredeleteOrder";
+		            if(false)$.post(
+		                    page,
+		                    {"oid":deleteOrderid},
+		                    function(result){
+		                        if("success"==result){
+		                            $("table.orderListItemTable[oid="+deleteOrderid+"]").hide();
+		                        }
+		                        else{
+		                            location.href="login.jsp";
+		                        }
+		                    }
+		                );
+		             
+		        }
+		    })     
+		     
+		    $(".ask2delivery").click(function(){
+		        var link = $(this).attr("link");
+		        $(this).hide();
+		        page = link;
+		        $.ajax({
+		               url: page,
+		               success: function(result){
+		                alert("卖家已秒发，刷新当前页面，即可进行确认收货")
+		               }
+		            });
+		         
+		    });
+		});
+		 
+		</script>
+		<!--标题部分-->
+		<div class="boughtDiv">
+			<div class="orderType">
+				<div class="selectedOrderType">
+					<a href="#nowhere" orderstatus="all">所有订单</a>
+				</div>
+				<div>
+					<a href="#nowhere" orderstatus="waitPay">待付款</a>
+				</div>
+				<div>
+					<a href="#nowhere" orderstatus="waitDelivery">待发货</a>
+				</div>
+				<div>
+					<a href="#nowhere" orderstatus="waitConfirm">待收货</a>
+				</div>
+				<div>
+					<a class="noRightborder" href="#nowhere" orderstatus="waitReview">待评价</a>
+				</div>
+				<div class="orderTypeLastOne">
+					
+				</div>
+			</div>
+			<div style="clear:both"></div>
+			<div class="orderListTitle">
+				<table class="orderListTitleTable">
+					<tr>
+						<td>宝贝</td>
+						<td width="100px">单价</td>
+						<td width="100px">数量</td>
+						<td width="100px">实付款</td>
+						<td width="100px">交易操作</td>
+					</tr>
+				</table>
+			</div>
+			<!--产品列表部分-->
+			<div class="orderListItem">
+				<table oid="946" orderstatus="waitReview" class="orderListItemTable">
+					<tr class="orderListItemFirstTR">
+						<td colspan="2">
+							<b>2016-09-12 17:00:41</b>
+							<span>订单号: 20160912170041674794</span>
+						</td>
+						<td colspan="2"><img width="13px" src="https://how2j.cn/tmall/img/site/orderItemTmall.png" >天猫商场</td>
+						<td>
+							<a href="#nowhere" class="wangwanglink"><div class="orderItemWangWangGif"></div></a>
+						</td>
+						<td class="orderItemDeleteTD">
+							<a href="#nowhere" oid="946" class="deleteOrderLink"><span class="orderListItemDelete glyphicon glyphicon-trash"></span></a>
+						</td>
+					</tr>
+					<tr class="orderItemProductInfoPartTR">
+						<td class="orderItemProductInfoPartTD"><img width="80" height="80" src="https://how2j.cn/tmall/img/productSingle_middle/3796.jpg"></td>
+						<td class="orderItemProductInfoPartTD">
+							<div class="orderListItemProductLinkOutDiv">
+								<a href="#nowhere">公众智能扫地机器人家用全自动电动清洁地毯擦拖地一体机吸尘器</a>
+								<div class="orderListItemProductLinkInnerDiv">
+									<img title="支持信用卡支付" src="https://how2j.cn/tmall/img/site/creditcard.png" >
+									<img title="消费者保障服务,承诺7天退货" src="https://how2j.cn/tmall/img/site/7day.png" >
+									<img title="消费者保障服务,承诺如实描述" src="https://how2j.cn/tmall/img/site/promise.png" >
+								</div>
+							</div>
+						</td>
+						<td width="100px" class="orderItemProductInfoPartTD">
+							<div class="orderListItemProductOriginalPrice">￥2,499.00</div>
+							<div class="orderListItemProductPrice">￥2,124.15</div>
+						</td>
+						<td width="100px" valign="top" class="orderListItemNumberTD orderItemOrderInfoPartTD" rowspan="1">
+							<span class="orderListItemNumber">1</span>
+						</td>
+						<td width="120px" valign="top" class="orderListItemProductRealPriceTD orderItemOrderInfoPartTD" rowspan="1">
+							<div class="orderListItemProductRealPrice">￥2,124.15</div>
+							<div class="orderListItemPriceWithTransport">(含运费：￥0.00)</div>
+						</td>
+						<td width="100px" valign="top" class="orderListItemButtonTD orderItemOrderInfoPartTD" rowspan="1">
+							<a href="#nowhere"><button class="orderListItemReview">评价</button></a>
+						</td>
+					</tr>
+				</table>
+				<table oid="945" orderstatus="waitReview" class="orderListItemTable">
+					<tr class="orderListItemFirstTR">
+						<td colspan="2">
+							<b>2016-09-12 17:00:33</b>
+							<span>订单号: 201609121700333128784</span>
+						</td>
+						<td colspan="2"><img width="13px" src="https://how2j.cn/tmall/img/site/orderItemTmall.png" >天猫商场</td>
+						<td>
+							<a href="#nowhere" class="wangwanglink"><div class="orderItemWangWangGif"></div></a>
+						</td>
+						<td class="orderItemDeleteTD">
+							<a href="#nowhere" oid="945" class="deleteOrderLink"><span class="orderListItemDelete glyphicon glyphicon-trash"></span></a>
+						</td>
+					</tr>
+					<tr class="orderItemProductInfoPartTR">
+						<td class="orderItemProductInfoPartTD"><img width="80" height="80" src="https://how2j.cn/tmall/img/productSingle_middle/6651.jpg"></td>
+						<td class="orderItemProductInfoPartTD">
+							<div class="orderListItemProductLinkOutDiv">
+								<a href="#nowhere">ULIFE原创信封包男个性真皮手包男士手拿包休闲男包手抓包拉链潮</a>
+								<div class="orderListItemProductLinkInnerDiv">
+									<img title="支持信用卡支付" src="https://how2j.cn/tmall/img/site/creditcard.png" >
+									<img title="消费者保障服务,承诺7天退货" src="https://how2j.cn/tmall/img/site/7day.png" >
+									<img title="消费者保障服务,承诺如实描述" src="https://how2j.cn/tmall/img/site/promise.png" >
+								</div>
+							</div>
+						</td>
+						<td width="100px" class="orderItemProductInfoPartTD">
+							<div class="orderListItemProductOriginalPrice">￥1,188.00</div>
+							<div class="orderListItemProductPrice">￥1,128.60</div>
+						</td>
+						<td width="100px" valign="top" class="orderListItemNumberTD orderItemOrderInfoPartTD" rowspan="1">
+							<span class="orderListItemNumber">1</span>
+						</td>
+						<td width="120px" valign="top" class="orderListItemProductRealPriceTD orderItemOrderInfoPartTD" rowspan="1">
+							<div class="orderListItemProductRealPrice">￥1,128.60</div>
+							<div class="orderListItemPriceWithTransport">(含运费：￥0.00)</div>
+						</td>
+						<td width="100px" valign="top" class="orderListItemButtonTD orderItemOrderInfoPartTD" rowspan="1">
+							<a href="#nowhere"><button class="orderListItemConfirm">确认收货</button></a>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<!--页脚一-->
+		<div style="display: block;" class="footer" id="footer">
+			<div class="footer_ensure" id="footer_ensure">
+				<a href="#nowhere">
+					<img src="https://how2j.cn/tmall/img/site/ensure.png">
+				</a>
+			</div>
+			<div class="footer_desc" id="footer_desc">
+				<div class="descColumn">
+				    <span class="descColumnTitle">购物指南</span>
+				    <a href="#nowhere">免费注册</a> 
+				    <a href="#nowhere">开通支付宝</a> 
+				    <a href="#nowhere">支付宝充值</a>
+				</div>
+				<div class="descColumn">
+				    <span class="descColumnTitle">天猫保障</span>
+				    <a href="#nowhere">发票保障</a> 
+				    <a href="#nowhere">售后规则</a> 
+				    <a href="#nowhere">缺货赔付</a>
+				</div>
+				<div class="descColumn">
+				    <span class="descColumnTitle">支付方式</span>
+				    <a href="#nowhere">快捷支付</a> 
+				    <a href="#nowhere">信用卡</a> 
+				    <a href="#nowhere">蚂蚁花呗</a>
+				    <a href="#nowhere">货到付款</a>
+				</div>
+				<div class="descColumn">
+				    <span class="descColumnTitle">商家服务</span>
+				    <a href="#nowhere">商家入驻</a> 
+				    <a href="#nowhere">商家中心</a> 
+				    <a href="#nowhere">天猫智库</a>
+				    <a href="#nowhere">天猫规则</a>
+				    <a href="#nowhere">物流服务</a>
+				    <a href="#nowhere">喵言喵语</a>
+				    <a href="#nowhere">运营服务</a>
+				</div>
+				<div class="descColumn">
+				    <span class="descColumnTitle">手机天猫</span>
+				    <a href="#nowhere"><img src="https://how2j.cn/tmall/img/site/ma.png"></a> 
+				</div>
+			</div>
+			<div style="clear:both"></div>	    
+		</div>
+		<!--页脚二-->
+		<div id="footer" class="footer">
+			<img src="https://how2j.cn/tmall/img/site/cateye.png" class="cateye" id="cateye" />
+			<div id="copyright" class="copyright">
+				<div class="white_link">
+				    <a href="#nowhere">关于天猫</a>
+				    <a href="#nowhere"> 帮助中心</a>
+				    <a href="#nowhere">开放平台</a>
+				    <a href="#nowhere">  诚聘英才</a>
+				    <a href="#nowhere">联系我们</a>
+				    <a href="#nowhere">网站合作</a>
+				    <a href="#nowhere">法律声明</a>
+				    <a href="#nowhere">知识产权</a>
+				    <a href="#nowhere">  廉正举报 </a>
+				</div>
+				<div class="white_link">
+				    <a href="#nowhere"> 阿里巴巴集团</a><span class="slash">|</span>
+				    <a href="#nowhere"> 淘宝网</a><span class="slash">|</span>
+				    <a href="#nowhere">天猫 </a><span class="slash">|</span>
+				    <a href="#nowhere">  聚划算</a><span class="slash">|</span>
+				    <a href="#nowhere">全球速卖通</a><span class="slash">|</span>
+				    <a href="#nowhere">阿里巴巴国际交易市场</a><span class="slash">|</span>
+				    <a href="#nowhere">1688</a><span class="slash">|</span>
+				    <a href="#nowhere">阿里妈妈</a><span class="slash">|</span>
+				    <a href="#nowhere">  阿里旅行·去啊  </a><span class="slash">|</span>
+				    <a href="#nowhere">  阿里云计算    </a><span class="slash">|</span>
+				    <a href="#nowhere">  阿里通信     </a><span class="slash">|</span>
+				    <a href="#nowhere">  YunOS    </a><span class="slash">|</span>
+				    <a href="#nowhere">  阿里旅行·去啊  </a><span class="slash">|</span>
+				    <a href="#nowhere">   万网  </a><span class="slash">|</span>
+				    <a href="#nowhere">  高德   </a><span class="slash">|</span>
+				    <a href="#nowhere"> 优视    </a><span class="slash">|</span>
+				    <a href="#nowhere">  友盟   </a><span class="slash">|</span>
+				    <a href="#nowhere">  虾米   </a><span class="slash">|</span>
+				    <a href="#nowhere">  天天动听 </a><span class="slash">|</span>
+				    <a href="#nowhere">  来往   </a><span class="slash">|</span>
+				    <a href="#nowhere">  钉钉   </a><span class="slash">|</span>
+				    <a href="#nowhere">  支付宝      </a>
+				</div>
+				<div class="license">
+				    <span>增值电信业务经营许可证： 浙B2-20110446</span>
+				    <span>网络文化经营许可证：浙网文[2015]0295-065号</span>
+				    <span>互联网医疗保健信息服务 审核同意书 浙卫网审【2014】6号 </span>
+				    <span>互联网药品信息服务资质证书编号：浙-（经营性）-2012-0005</span>
+				    <div class="copyRightYear">© 2003-2016 TMALL.COM 版权所有</div>
+				    <div>
+				        <img src="https://how2j.cn/tmall/img/site/copyRight1.jpg">
+				        <img src="https://how2j.cn/tmall/img/site/copyRight2.jpg">
+				    </div>
+				</div>
+			</div>        
+		</div>
+	</body>
+</html>
+
+
+
+
